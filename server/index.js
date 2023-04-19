@@ -9,9 +9,7 @@ const socket = require("socket.io");
 const app = express();
 require('dotenv').config();
 
-app.use(cors({
-  origin: 'https://snappychatapp.netlify.app'
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth",userRoutes);
@@ -36,7 +34,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
 
 const io = socket(server, {
   cors: {
-    origin: "https://ephemeral-cat-0d4375.netlify.app",
+    origin: process.env.ORIGIN,
     credentials: true,
   },
 });
